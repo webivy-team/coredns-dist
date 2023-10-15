@@ -6,7 +6,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "release": "npm run darwin-x64 && npm run darwin-arm64 && npm run linux-arm64 && npm run linux-x64 && npm run win32-x64 && npm update",
+    "pre-release": "jq '.version = \"'v${COREDNS_VERSION}-${COREDNS_DIST_VERSION}'\"' package.json > package.json.tmp && mv package.json.tmp package.json && npm run darwin-x64 && npm run darwin-arm64 && npm run linux-arm64 && npm run linux-x64 && npm run win32-x64 && npm update",
     "darwin-x64": "version=$(cat ./package.json | jq -r '.version') && jq '.optionalDependencies[\"coredns-dist-darwin-x64\"] = \"'$version'\"' package.json > package.json.tmp && mv package.json.tmp package.json && cd ../darwin-x64 && npm run pre-release",
     "darwin-arm64": "version=$(cat ./package.json | jq -r '.version') && jq '.optionalDependencies[\"coredns-dist-darwin-arm64\"] = \"'$version'\"' package.json > package.json.tmp && mv package.json.tmp package.json && cd ../darwin-arm64 && npm run pre-release",
     "linux-arm64": "version=$(cat ./package.json | jq -r '.version') && jq '.optionalDependencies[\"coredns-dist-linux-arm64\"] = \"'$version'\"' package.json > package.json.tmp && mv package.json.tmp package.json && cd ../linux-arm64 && npm run pre-release",
