@@ -10,7 +10,7 @@ permissions: write-all
 
 env:
   COREDNS_VERSION: "1.11.1"
-  COREDNS_DIST_VERSION: "1"
+  COREDNS_DIST_VERSION: "2"
 
 jobs:
   package:

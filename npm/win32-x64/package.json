@@ -1,4 +1,5 @@
 {
+  "repository": "https://github.com/webivy-team/coredns-dist",
   "name": "coredns-dist-win32-x64",
   "license": "MIT",
   "scripts": {
