@@ -1,0 +1,10 @@
+.:1053 {
+    forward . 8.8.8.8:53
+    log
+}
+
+example.org:1053 {
+    file db.example.org {
+        reload 1s
+    }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "coredns-dist-linux-x64",
+  "license": "MIT",
+  "scripts": {
+    "pre-release": "version=$(cat ../coredns-dist/package.json | jq -r '.version') && corednsVersion=$(echo $version | sed -e 's/-[0-9]*$//g' | sed -e 's/^v//g') && jq '.version = \"'$version'\"' package.json > package.json.tmp && mv package.json.tmp package.json && curl -LO https://github.com/coredns/coredns/releases/download/v${corednsVersion}/coredns_${corednsVersion}_linux_amd64.tgz && tar -xvf coredns_*.tgz && rm coredns_*.tgz"
+  },
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "bin": "coredns",
+  "version": "v1.11.1-1"
+}
