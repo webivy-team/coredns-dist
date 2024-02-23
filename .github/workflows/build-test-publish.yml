@@ -9,15 +9,15 @@ on:
 permissions: write-all
 
 env:
-  COREDNS_VERSION: "1.11.1"
-  COREDNS_DIST_VERSION: "2"
+  COREDNS_VERSION: "1.11.1" # https://github.com/coredns/coredns/releases
+  COREDNS_DIST_VERSION: "3"
 
 jobs:
   package:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout master branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Pack packages
         run: |
@@ -31,37 +31,37 @@ jobs:
         run: find
 
       - name: Upload bundle darwin-arm64
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: npm/darwin-arm64/coredns-dist-darwin-arm64-*.tgz
           name: coredns-dist-darwin-arm64.tgz
           if-no-files-found: error
       - name: Upload bundle darwin-x64
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: npm/darwin-x64/coredns-dist-darwin-x64-*.tgz
           name: coredns-dist-darwin-x64.tgz
           if-no-files-found: error
       - name: Upload bundle win32-x64
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: npm/win32-x64/coredns-dist-win32-x64-*.tgz
           name: coredns-dist-win32-x64.tgz
           if-no-files-found: error
       - name: Upload bundle linux-x64
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: npm/linux-x64/coredns-dist-linux-x64-*.tgz
           name: coredns-dist-linux-x64.tgz
           if-no-files-found: error
       - name: Upload bundle linux-arm64
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: npm/linux-arm64/coredns-dist-linux-arm64-*.tgz
           name: coredns-dist-linux-arm64.tgz
           if-no-files-found: error
       - name: Upload bundle coredns-dist
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: npm/coredns-dist/coredns-dist-*.tgz
           name: coredns-dist.tgz
@@ -72,15 +72,15 @@ jobs:
     needs:
       - package
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: coredns-dist.tgz
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: coredns-dist-linux-x64.tgz
       - name: Run NPM Test
@@ -93,11 +93,11 @@ jobs:
     needs:
       - package
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/download-artifact@v3
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
         with:
           name: coredns-dist.tgz
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: coredns-dist-linux-arm64.tgz
       - name: Run testing
@@ -119,15 +119,15 @@ jobs:
     needs:
       - package
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: coredns-dist.tgz
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: coredns-dist-darwin-x64.tgz
       - name: Run NPM Test
@@ -140,15 +140,15 @@ jobs:
     needs:
       - package
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: coredns-dist.tgz
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: coredns-dist-win32-x64.tgz
       - name: Run NPM Test
@@ -162,15 +162,15 @@ jobs:
     needs:
       - package
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: coredns-dist.tgz
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: coredns-dist-darwin-arm64.tgz
       - name: Run NPM Test
@@ -188,26 +188,26 @@ jobs:
       - test-darwin-arm64
     steps:
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           registry-url: 'https://registry.npmjs.org'
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: coredns-dist.tgz
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: coredns-dist-linux-x64.tgz
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: coredns-dist-linux-arm64.tgz
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: coredns-dist-darwin-x64.tgz
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: coredns-dist-win32-x64.tgz
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: coredns-dist-darwin-arm64.tgz
       - name: Run NPM Publish
@@ -218,7 +218,7 @@ jobs:
           npm publish coredns-dist-linux-x64-v*.tgz
           npm publish coredns-dist-linux-arm64-v*.tgz
           npm publish coredns-dist-darwin-x64-v*.tgz
-          npm publish coredns-dist-win32-x64-v*.tgz
+          # npm publish coredns-dist-win32-x64-v*.tgz
           npm publish coredns-dist-darwin-arm64-v*.tgz
 
   push:
@@ -231,7 +231,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout master branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Pack packages
         run: |
