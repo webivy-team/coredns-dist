@@ -12,5 +12,5 @@
     "x64"
   ],
   "bin": "coredns.exe",
-  "version": "v1.11.1-2"
+  "version": "v1.11.1-3"
 }

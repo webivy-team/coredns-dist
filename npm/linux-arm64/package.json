@@ -12,5 +12,5 @@
     "arm64"
   ],
   "bin": "coredns",
-  "version": "v1.11.1-2"
+  "version": "v1.11.1-3"
 }
